@@ -19,7 +19,7 @@ class _ImageWidget extends StatelessWidget {
           Radius.circular(Values.radiusMedium),
         ),
       ),
-      child: Image.network(Values.dogUrls.first),
+      child: Image.network(LocalValues.dogUrls.first),
     );
   }
 }

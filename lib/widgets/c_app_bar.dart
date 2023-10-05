@@ -1,5 +1,5 @@
-import 'package:pet/common_libs.dart';
-import 'package:pet/styles/values.dart';
+import 'package:flutter/material.dart';
+import 'package:pet/styles/local_values.dart';
 
 class CAppBar extends AppBar {
   CAppBar(
@@ -7,7 +7,7 @@ class CAppBar extends AppBar {
     super.key,
     List<Widget>? actions,
   }) : super(
-          title: Text("Pety.", style: Values.appBarTextStyle(context)),
+          title: Text("Pety.", style: LocalValues.appBarTextStyle(context)),
           centerTitle: false,
           actions: actions,
         );

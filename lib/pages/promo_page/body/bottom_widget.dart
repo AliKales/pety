@@ -6,7 +6,7 @@ class _BottomWidget extends StatelessWidget {
   final PageController controller;
 
   void _onGetStarted(BuildContext context) {
-    context.navigatorPushReplacement(const MainPageView());
+    context.go(PagePaths.main);
   }
 
   @override

@@ -23,6 +23,7 @@ class _Page extends StatelessWidget {
           ),
           context.sizedBox(height: Values.paddingHeightSmallXX),
           _Text(text: text, text2: text2),
+          context.sizedBox(height: Values.paddingHeightMediumXX),
         ],
       ),
     );

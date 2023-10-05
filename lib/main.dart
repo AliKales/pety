@@ -1,8 +1,9 @@
-import 'package:pet/common_libs.dart';
-import 'package:pet/pages/promo_page/promo_page_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet/router.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,16 +11,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Pet',
-        debugShowCheckedModeBanner: false,
-        theme: _theme(),
-        home: const PromoPageView());
+    return MaterialApp.router(
+      title: "Pety",
+      debugShowCheckedModeBanner: false,
+      theme: _theme(),
+      routerDelegate: appRouter.routerDelegate,
+      routeInformationProvider: appRouter.routeInformationProvider,
+      routeInformationParser: appRouter.routeInformationParser,
+    );
   }
 
   ThemeData _theme() {
     const primary = Color(0xFFeb9c52);
     return ThemeData(
+      fontFamily: "Roboto",
       colorScheme: const ColorScheme.light(
         primary: primary,
       ),

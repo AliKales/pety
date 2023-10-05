@@ -1,4 +1,4 @@
-part of '../main_page_view.dart';
+part of '../vets_page_view.dart';
 
 class _TextField extends StatelessWidget {
   const _TextField();

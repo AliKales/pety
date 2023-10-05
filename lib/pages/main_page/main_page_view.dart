@@ -1,69 +1,30 @@
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:pet/common_libs.dart';
-import 'package:pet/styles/values.dart';
-import 'package:pet/widgets/c_app_bar.dart';
+import 'package:caroby/caroby.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pet/core/riverpod/r_page.dart';
+import 'package:pet/pages/main_page/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:pet/pages/vets_page/vets_page_view.dart';
 
-import 'widgets/animal_card/animal_card.dart';
+import '../../widgets/c_app_bar.dart';
 
-part 'mixin_main_page.dart';
-part 'widgets/filter_icon.dart';
-part 'widgets/map.dart';
-part 'widgets/text_field.dart';
-part 'widgets/title.dart';
+part 'body/body.dart';
 
-class MainPageView extends StatefulWidget {
+class MainPageView extends ConsumerWidget {
   const MainPageView({super.key});
 
-  @override
-  State<MainPageView> createState() => _MainPageViewState();
-}
-
-class _MainPageViewState extends State<MainPageView> with _MixinMainPage {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CAppBar(context),
-      body: Padding(
-        padding: Values.paddingPage(context),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: _TextField(),
-                ),
-                _FilterIcon(),
-              ],
-            ),
-            context.sizedBox(height: Values.paddingHeightSmallX),
-            _animalCardHeight == null
-                ? AnimalCard(key: _keyAnimalCard)
-                : _listViewAnimalCards(),
-            context.sizedBox(height: Values.paddingHeightSmallXX),
-            const _Title(),
-            const Expanded(
-              child: _Map(),
-            ),
-            context.sizedBox(height: Values.paddingHeightSmallX),
-          ],
-        ),
-      ),
-    );
+  void _onBottomNavBarTap(WidgetRef ref, int index) {
+    ref.read(rPage.notifier).state = index;
   }
 
-  Widget _listViewAnimalCards() {
-    return SizedBox(
-      height: _animalCardHeight! + (_animalCardHeight! * 0.05),
-      child: ListView.builder(
-        itemBuilder: (context, index) => const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: AnimalCard(),
-        ),
-        itemCount: 5,
-        scrollDirection: Axis.horizontal,
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final page = ref.watch(rPage);
+    return Scaffold(
+      appBar: CAppBar(context),
+      body: _Body(page),
+      bottomNavigationBar: BottomNavBar(
+        page: page,
+        onTap: (value) => _onBottomNavBarTap(ref, value),
       ),
     );
   }

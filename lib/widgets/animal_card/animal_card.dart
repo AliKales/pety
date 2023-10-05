@@ -1,13 +1,21 @@
-import 'package:pet/common_libs.dart';
-
-import '../../../../styles/values.dart';
+import 'package:caroby/caroby.dart';
+import 'package:flutter/material.dart';
+import 'package:pet/core/models/m_pet.dart';
+import 'package:pet/styles/local_values.dart';
 
 part 'fav_icon.dart';
 part 'image_widget.dart';
 part 'location.dart';
 
 class AnimalCard extends StatelessWidget {
-  const AnimalCard({super.key});
+  const AnimalCard({
+    super.key,
+    required this.pet,
+    this.onFavChange,
+  });
+
+  final MPet pet;
+  final ValueChanged<bool>? onFavChange;
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +59,19 @@ class AnimalCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const _FavIcon(),
+              _getFavIcon(),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _getFavIcon() {
+    if (pet.id == "-1") return const SizedBox.shrink();
+    return _FavIcon(
+      pet.isFav,
+      onFavChange: onFavChange,
     );
   }
 }

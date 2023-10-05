@@ -1,4 +1,4 @@
-part of '../main_page_view.dart';
+part of 'map_widget.dart';
 
 class _Title extends StatelessWidget {
   const _Title();

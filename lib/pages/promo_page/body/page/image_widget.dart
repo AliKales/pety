@@ -10,7 +10,8 @@ class _ImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.maxFinite,
+      width: context.width,
+      height: context.width,
       decoration: BoxDecoration(
         color: context.colorScheme.primary.withOpacity(0.4),
         borderRadius: BorderRadius.all(
